@@ -70,6 +70,23 @@ const styles = createStyleSheet({
     },
 
     /**
+     *  JMP-Added
+     *  
+     *  Toolbar for the vertical alignment
+     */
+
+     toolbarVertical: {
+        alignItems: 'center',
+        flexDirection: 'column',
+        flexGrow: 0,
+        justifyContent: 'center',
+        marginBottom: BoxModel.margin / 2,
+        paddingHorizontal: BoxModel.margin,
+        paddingVertical: BoxModel.margin
+     },
+
+
+    /**
      * The style of toolbar buttons.
      */
     toolbarButton,

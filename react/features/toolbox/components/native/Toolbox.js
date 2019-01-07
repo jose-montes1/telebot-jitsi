@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 import { Container } from '../../../base/react';
 import { InviteButton } from '../../../invite';
-
+import { UpArrowButton, DownArrowButton, RightArrowButton, LeftArrowButton } from './TelebotCommandButton';
 import AudioMuteButton from '../AudioMuteButton';
 import HangupButton from '../HangupButton';
 import OverflowMenuButton from './OverflowMenuButton';
@@ -24,7 +24,7 @@ import VideoMuteButton from '../VideoMuteButton';
  * @private
  * @type number
  */
-const _BUTTON_COUNT = 4;
+const _BUTTON_COUNT = 7;
 
 /**
  * Factor relating the hangup button and other toolbar buttons.
@@ -197,13 +197,23 @@ class Toolbox extends Component<Props, State> {
         }
 
         return (
-            <View
+           <View
                 pointerEvents = 'box-none'
                 style = { styles.toolbar }>
                 <InviteButton styles = { buttonStyles } />
                 <AudioMuteButton
                     styles = { buttonStyles }
                     toggledStyles = { toggledButtonStyles } />
+                //JMP
+                <LeftArrowButton styles = {buttonStyles} />
+                <View 
+                    pointerEvents = 'box-none'
+                    style = { styles.toolbarVertical}>
+                    <UpArrowButton styles = {buttonStyles}/>
+                    <DownArrowButton styles = {buttonStyles}/>
+                </View>
+                <RightArrowButton styles = {buttonStyles}/>
+
                 <HangupButton styles = { hangupButtonStyles } />
                 <VideoMuteButton
                     styles = { buttonStyles }
