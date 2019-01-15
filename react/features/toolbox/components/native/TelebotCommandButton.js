@@ -10,7 +10,7 @@ import type { AbstractButtonProps } from '../../../base/toolbox';
 import { translate } from '../../../base/i18n';
 import {getCurrentConference } from '../../../base/conference';
 
-
+import {NativeModules as NM} from 'react-native';
 
 /**
  * The type of the React {@code Component} props of {@link AudioOnlyButton}.
@@ -24,20 +24,27 @@ type Props = AbstractButtonProps & {
 
 };
 
-const upCommand = 'L|100:R|100';
-const downCommand = 'L|-100:R|-100';
-const leftCommand = 'L|-100:R|100';
-const rightCommand = 'L|100:R|-100';
 
-const upIcon = 'circle-up';
+
+
+const upCommand = 'w';
+const downCommand = 's';
+const leftCommand = 'a';
+const rightCommand = 'd';
+
+const upIcon = 'arrow-thick-up';
 const downIcon = 'arrow-thick-down';
 const leftIcon = 'arrow-thick-left';
 const rightIcon = 'arrow-thick-right';
+const bluetoothIcon = 'circle-down';
+
 
 const upLabel = 'upButton';
 const downLabel = 'downButton';
 const leftLabel = 'leftButton';
 const rightLabel = 'rightLabel';
+const bluetoothLabel = 'bluetoothLabel';
+
 
 class TelebotCommandButton extends AbstractButton<Props, *>{
 	
@@ -63,6 +70,28 @@ class TelebotCommandButton extends AbstractButton<Props, *>{
 		
 
 	}
+}
+
+
+class TelebotBluetoothButton extends AbstractButton<Props, *>{
+	
+	TelebotBluetoothButton(iconName, label){
+		this.iconName = iconName;
+		this.label = 'toolbar.' + label;
+		this.tooltip = label;
+		accesibilityLabel = 'toolbar.accessibilityLabel.' + label;
+	}
+
+	/**
+     * Handles clicking / pressing the button.
+     *
+     * @override
+     * @protected
+     * @returns {void}
+     */
+	_handleClick(){
+		NM.RNTelebotBluetoothComms.connectToDevice();
+	}
 
 }
 
@@ -71,6 +100,13 @@ function _mapStateToProps(state): Object {
     return {
         current_conference: conference,
     }
+}
+
+class BTButton extends TelebotBluetoothButton {
+	iconName = bluetoothIcon;
+	label = 'toolbar.' + bluetoothLabel;
+	tooltip = bluetoothLabel;
+	accesibilityLabel = 'toolbar.accessibilityLabel.' + bluetoothLabel;
 }
 
 
@@ -111,6 +147,7 @@ class RightButton extends TelebotCommandButton {
 
 
 
+export const BluetoothButton = translate(connect(_mapStateToProps)(BTButton));
 export const UpArrowButton = translate(connect(_mapStateToProps)(UpButton));
 export const DownArrowButton = translate(connect(_mapStateToProps)(DownButton));
 export const LeftArrowButton = translate(connect(_mapStateToProps)(LeftButton));

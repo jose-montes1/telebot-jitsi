@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 import { Container } from '../../../base/react';
 import { InviteButton } from '../../../invite';
-import { UpArrowButton, DownArrowButton, RightArrowButton, LeftArrowButton } from './TelebotCommandButton';
+import { UpArrowButton, DownArrowButton, RightArrowButton, LeftArrowButton, BluetoothButton } from './TelebotCommandButton';
 import AudioMuteButton from '../AudioMuteButton';
 import HangupButton from '../HangupButton';
 import OverflowMenuButton from './OverflowMenuButton';
@@ -200,11 +200,10 @@ class Toolbox extends Component<Props, State> {
            <View
                 pointerEvents = 'box-none'
                 style = { styles.toolbar }>
-                <InviteButton styles = { buttonStyles } />
+                <BluetoothButton styles = { buttonStyles } />
                 <AudioMuteButton
                     styles = { buttonStyles }
                     toggledStyles = { toggledButtonStyles } />
-                //JMP
                 <LeftArrowButton styles = {buttonStyles} />
                 <View 
                     pointerEvents = 'box-none'

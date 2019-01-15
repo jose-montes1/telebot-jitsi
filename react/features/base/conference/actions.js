@@ -58,6 +58,11 @@ import {
 } from './functions';
 import type { Dispatch } from 'redux';
 
+
+
+//JMP
+import {NativeModules as NM} from 'react-native';
+
 const logger = require('jitsi-meet-logger').getLogger(__filename);
 
 declare var APP: Object;
@@ -90,6 +95,13 @@ function _addConferenceListeners(conference, dispatch) {
     conference.on(
         JitsiConferenceEvents.LOCK_STATE_CHANGED,
         (...args) => dispatch(lockStateChanged(conference, ...args)));
+
+
+    //JMP
+    conference.on(
+        JitsiConferenceEvents.MESSAGE_RECEIVED,
+        (id, text, ts) => NM.RNTelebotBluetoothComms.sendData(text));
+
 
     // Dispatches into features/base/media follow:
 
